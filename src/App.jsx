@@ -1,6 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+/* import all the icons in Free Solid, Free Regular, and Brands styles */
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+library.add(fas, far, fab);
+
 export default function App() {
   const [titleSearch, setTitleSearch] = useState("");
   const [movieResults, setMovieResults] = useState([]);
@@ -41,6 +51,23 @@ export default function App() {
     return null;
   };
 
+  const voteConversion = (vote) => {
+    const rating = vote / 2;
+    const roundedRating = Math.ceil(rating);
+
+    const stars = [];
+
+    for (let i = 0; i < roundedRating; i++) {
+      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
+    }
+
+    for (let i = 0; i < 5 - roundedRating; i++) {
+      stars.push(<FontAwesomeIcon icon="fa-regular fa-star" />);
+    }
+
+    return stars;
+  };
+
   return (
     <>
       <div className="container my-5">
@@ -71,7 +98,7 @@ export default function App() {
                           <span>Lingua: {res.original_language}</span>
                         )}
                       </li>
-                      <li>Voto: {res.vote_average}</li>
+                      <li>Voto: {voteConversion(res.vote_average)}</li>
                     </ul>
                   </div>
                 );
@@ -101,7 +128,7 @@ export default function App() {
                           <span>Lingua: {res.original_language}</span>
                         )}
                       </li>
-                      <li>Voto: {res.vote_average}</li>
+                      <li>Voto: {voteConversion(res.vote_average)}</li>
                     </ul>
                   </div>
                 );
