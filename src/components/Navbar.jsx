@@ -7,7 +7,7 @@ export default function Navbar() {
   const [titleSearch, setTitleSearch] = useState("");
   const navigate = useNavigate();
 
-  const { movieResults, setMovieResults, showsResults, setShowsResults } = useSearch();
+  const { setMovieResults, setShowsResults } = useSearch();
 
   const handleChange = (e) => setTitleSearch(e.target.value);
 
@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <h1 className="text-danger mb-0">BOOLFLIX</h1>
+        <h1 className="h2 text-danger fw-bold mb-0">BOOLFLIX</h1>
         <button
           className="navbar-toggler"
           type="button"
