@@ -31,14 +31,26 @@ export default function App() {
 
         {results && (
           <ul>
-            {results.map((res) => (
-              <ul className="border-bottom">
-                <li>Titolo: {res.title}</li>
-                <li>Titolo Originale: {res.original_title}</li>
-                <li>Lingua: {res.original_language}</li>
-                <li>Voto: {res.vote_average}</li>
-              </ul>
-            ))}
+            {results.map((res) => {
+              let flag;
+              if (res.original_language === "en") flag = "https://flagsapi.com/US/flat/16.png";
+              if (res.original_language === "it") flag = "https://flagsapi.com/IT/flat/16.png";
+              if (res.original_language === "ja") flag = "https://flagsapi.com/JP/flat/16.png";
+              return (
+                <ul key={res.id} className="p-0 border-bottom">
+                  <li>Titolo: {res.title}</li>
+                  <li>Titolo Originale: {res.original_title}</li>
+                  {flag ? (
+                    <li>
+                      <img src={flag} alt="flag" />
+                    </li>
+                  ) : (
+                    <li>Lingua: {res.original_language}</li>
+                  )}
+                  <li>Voto: {res.vote_average}</li>
+                </ul>
+              );
+            })}
           </ul>
         )}
       </div>
