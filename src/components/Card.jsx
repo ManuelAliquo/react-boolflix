@@ -2,10 +2,9 @@ import { useState } from "react";
 
 export default function Card({ res, flagUrl, voteConversion }) {
   const [hovered, setHovered] = useState(false);
-
   const imgUrl = res.poster_path
     ? "https://image.tmdb.org/t/p/original/" + res.poster_path
-    : "src/assets/img/undefined_poster.png";
+    : "src/assets/img/undefined_poster.png"; // placeholder img
 
   const handleOnMouseEnter = () => {
     setHovered(true);

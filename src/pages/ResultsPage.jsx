@@ -16,7 +16,7 @@ const flagBaseUrl = "https://flagsapi.com/";
 
 export default function ResultsPage() {
   // destructuring context hook
-  const { movieResults, showsResults } = useSearch();
+  const { movieResults, showsResults, isLoading } = useSearch();
 
   // flags function
   const flagUrl = (lang) => {
@@ -44,15 +44,18 @@ export default function ResultsPage() {
     return stars;
   };
 
-  return movieResults.length === 0 && showsResults.length === 0 ? (
-    <h1 className="my-5">Loading...</h1>
-  ) : (
+  if (isLoading) return <h1 className="m-5 p-5">Loading...</h1>;
+
+  if (movieResults.length === 0 && showsResults.length === 0)
+    return <h1 className="m-5 p-5">No Results Found</h1>;
+
+  return (
     <>
       {/* movies */}
       {movieResults.length > 0 && (
         <section className="movie-section">
           <h2 className="h3 fw-semibold">Movies</h2>
-          <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+          <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3">
             {movieResults.map((res) => {
               return (
                 <Card key={res.id} res={res} flagUrl={flagUrl} voteConversion={voteConversion} />
@@ -65,7 +68,7 @@ export default function ResultsPage() {
       {showsResults.length > 0 && (
         <section className="show-section mt-3">
           <h2 className="h3 fw-semibold">TV Shows</h2>
-          <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+          <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3">
             {showsResults.map((res) => {
               return (
                 <Card key={res.id} res={res} flagUrl={flagUrl} voteConversion={voteConversion} />

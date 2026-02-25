@@ -55,3 +55,11 @@ header .nav-link {
   margin: 0;
   padding: 1rem;
 }
+
+.card {
+  transition: all 0.2s;
+}
+
+.card:hover {
+  scale: 1.02;
+}

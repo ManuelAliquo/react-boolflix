@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import HomePage from "./pages/HomePage";
-import ResultsPage from "./pages/resultsPage";
+import ResultsPage from "./pages/ResultsPage";
 import { SearchProvider } from "./contexts/SearchContext";
 
 export default function App() {

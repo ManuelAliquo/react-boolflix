@@ -15,7 +15,7 @@ export default function Navbar() {
   const [titleSearch, setTitleSearch] = useState("");
 
   // destructuring context hook
-  const { setMovieResults, setShowsResults } = useSearch();
+  const { setMovieResults, setShowsResults, setIsLoading } = useSearch();
 
   // navigate
   const navigate = useNavigate();
@@ -27,6 +27,8 @@ export default function Navbar() {
   const formSubmit = (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     // movies request
     axios.get(`${baseUrl}movie?api_key=${apiKey}&query=${titleSearch}`).then((res) => {
       setMovieResults(res.data.results);
@@ -35,8 +37,10 @@ export default function Navbar() {
     // shows request
     axios.get(`${baseUrl}tv?api_key=${apiKey}&query=${titleSearch}`).then((res) => {
       setShowsResults(res.data.results);
+      setIsLoading(false);
     });
 
+    setTitleSearch("");
     navigate("/results");
   };
 
@@ -69,6 +73,7 @@ export default function Navbar() {
               </button>
               <input
                 onChange={handleChange}
+                value={titleSearch}
                 name="search"
                 type="text"
                 className="navbar-search-input text-white"
