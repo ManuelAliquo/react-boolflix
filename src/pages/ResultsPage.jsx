@@ -1,4 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+library.add(fas, far, fab);
+
 import { useSearch } from "../contexts/SearchContext";
 
 import MovieCard from "../components/MovieCard";
@@ -7,9 +15,9 @@ import ShowCard from "../components/ShowCard";
 export default function ResultsPage() {
   // flags function
   const flagUrl = (lang) => {
-    if (lang === "en") return "https://flagsapi.com/US/flat/16.png";
-    if (lang === "it") return "https://flagsapi.com/IT/flat/16.png";
-    if (lang === "ja") return "https://flagsapi.com/JP/flat/16.png";
+    if (lang === "en") return "https://flagsapi.com/US/flat/32.png";
+    if (lang === "it") return "https://flagsapi.com/IT/flat/32.png";
+    if (lang === "ja") return "https://flagsapi.com/JP/flat/32.png";
     return null;
   };
 

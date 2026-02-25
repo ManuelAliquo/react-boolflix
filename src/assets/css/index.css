@@ -6,5 +6,52 @@ img {
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #141414;
-  color: #ffffff;
+  color: #fff;
+}
+
+header > .navbar {
+  background: #141414;
+  background: linear-gradient(0deg, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  height: 10vh;
+}
+
+header > .navbar h1 {
+  color: #e50914;
+}
+
+header .nav-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.navbar-search:focus-within {
+  border: 1px solid #fff;
+}
+
+.navbar-search-input {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.navbar-search-btn {
+  background-color: transparent;
+  border: 0;
+}
+
+.home-page {
+  height: 80vh;
+}
+
+.card ul {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 0.8rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 1rem;
 }

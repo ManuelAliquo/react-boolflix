@@ -1,29 +1,41 @@
+import { useState } from "react";
+
 export default function ShowCard({ res, flag, vote }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const imgUrl = res.poster_path
     ? "https://image.tmdb.org/t/p/original/" + res.poster_path
     : "src/assets/img/undefined_poster.png";
 
+  const handleOnMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleOnMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
-    <div className="col">
-      <div className="card border-0 h-100">
+    <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} className="col">
+      <div className="card border-0 h-100 position-relative">
         <img className="card-img" src={imgUrl} alt="poster" />
+        {isHovered && (
+          <ul className="list-unstyled w-100 h-100 text-center text-white">
+            <li>Title: {res.name}</li>
+            <li>Original Title: {res.original_name}</li>
+            <li>
+              {flag(res.original_language) ? (
+                <img src={flag(res.original_language)} alt="flag" />
+              ) : (
+                <span>Language: {res.original_language}</span>
+              )}
+            </li>
+            <li>Rating: {vote(res.vote_average)}</li>
+            <li>
+              <p>{res.overview}</p>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
 }
-
-// <div key={res.id} className="card">
-//   <img src={"https://image.tmdb.org/t/p/original/" + res.poster_path} alt="poster" />
-//   <ul className="list-unstyled">
-//     <li>Titolo: {res.name}</li>
-//     <li>Titolo Originale: {res.original_name}</li>
-//     <li>
-//       {flag(res.original_language) ? (
-//         <img src={flag(res.original_language)} alt="flag" />
-//       ) : (
-//         <span>Lingua: {res.original_language}</span>
-//       )}
-//     </li>
-//     <li>Voto: {vote(res.vote_average)}</li>
-//   </ul>
-// </div>
