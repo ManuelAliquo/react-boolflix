@@ -1,14 +1,26 @@
+// axios import
 import axios from "axios";
-import { useState } from "react";
+// context hook import
 import { useSearch } from "../contexts/SearchContext";
+// react-router import
 import { useNavigate, NavLink } from "react-router-dom";
 
-export default function Navbar() {
-  const [titleSearch, setTitleSearch] = useState("");
-  const navigate = useNavigate();
+import { useState } from "react";
 
+const baseUrl = `https://api.themoviedb.org/3/search/`;
+const apiKey = import.meta.env.VITE_API_KEY;
+
+export default function Navbar() {
+  // search state
+  const [titleSearch, setTitleSearch] = useState("");
+
+  // destructuring context hook
   const { setMovieResults, setShowsResults } = useSearch();
 
+  // navigate
+  const navigate = useNavigate();
+
+  // search handler
   const handleChange = (e) => setTitleSearch(e.target.value);
 
   // sumbit + requests
@@ -16,22 +28,14 @@ export default function Navbar() {
     e.preventDefault();
 
     // movies request
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=c776b6b5f6e8888b99469b6b4512a77c&query=${titleSearch}`,
-      )
-      .then((res) => {
-        setMovieResults(res.data.results);
-      });
+    axios.get(`${baseUrl}movie?api_key=${apiKey}&query=${titleSearch}`).then((res) => {
+      setMovieResults(res.data.results);
+    });
 
     // shows request
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/tv?api_key=c776b6b5f6e8888b99469b6b4512a77c&query=${titleSearch}`,
-      )
-      .then((res) => {
-        setShowsResults(res.data.results);
-      });
+    axios.get(`${baseUrl}tv?api_key=${apiKey}&query=${titleSearch}`).then((res) => {
+      setShowsResults(res.data.results);
+    });
 
     navigate("/results");
   };
@@ -56,7 +60,7 @@ export default function Navbar() {
             className="collapse navbar-collapse justify-content-between"
             id="navbarSupportedContent"
           >
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/" className="nav-link mt-1">
               Home
             </NavLink>
             <form onSubmit={formSubmit} className="navbar-search p-1" role="search">
